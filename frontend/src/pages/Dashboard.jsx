@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Dashboard = () => {
+  const [title, setTitle] = useState("");
+  const [file, setFile] = useState(null);
+
+  const submitFile = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("file", file);
+    console.log(title, file);
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-start pt-10 bg-base-200">
       <div className="card w-full max-w-md mx-auto bg-base-100 p-6 rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold mb-4 text-center">
           Upload PDF Files
         </h1>
-        <form>
+        <form onSubmit={submitFile}>
           <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-2">
               File Name
@@ -16,6 +27,8 @@ const Dashboard = () => {
               type="text"
               placeholder="Title"
               className="input input-bordered w-full"
+              required
+              onChange={(e) => setTitle(e.target.value)}
             />
           </div>
           <div className="mb-4">
@@ -24,8 +37,16 @@ const Dashboard = () => {
             </label>
             <input
               type="file"
+              accept="application/pdf"
               className="file-input file-input-bordered w-full"
+              required
+              onChange={(e) => setFile(e.target.files[0])}
             />
+          </div>
+          <div className="mb-4">
+            <button className="btn w-full" type="submit">
+              Upload
+            </button>
           </div>
         </form>
       </div>
