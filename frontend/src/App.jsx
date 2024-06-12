@@ -17,7 +17,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/viewer" element={<Viewer />} />
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </Router>
       </div>
     </html>
