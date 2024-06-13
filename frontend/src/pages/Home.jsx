@@ -1,7 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLoginMutation } from "../slices/userApiSlice";
+import { setCredentials } from "../slices/authSlice";
+import { toast } from "react-toastify";
 
 const Home = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/dashboard");
+    }
+  }, [navigate, userInfo]);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate("/");
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -14,7 +45,7 @@ const Home = () => {
           </p>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-lg bg-base-100">
-          <form className="card-body">
+          <form className="card-body" onSubmit={submitHandler}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -23,6 +54,8 @@ const Home = () => {
                 type="email"
                 placeholder="email"
                 className="input input-bordered"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
@@ -34,6 +67,8 @@ const Home = () => {
                 type="password"
                 placeholder="password"
                 className="input input-bordered"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               <label className="label">
@@ -43,8 +78,15 @@ const Home = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-primary" type="submit">
+                Login
+              </button>
             </div>
+            {isLoading && (
+              <div className="flex justify-center">
+                <span className="loading loading-dots loading-xs ml-0.5"></span>
+              </div>
+            )}
           </form>
         </div>
       </div>
