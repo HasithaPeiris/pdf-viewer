@@ -1,10 +1,12 @@
 # PDF Viewer Application
 
-![pdf-viewer-1](https://github.com/HasithaPeiris/pdf-viewer/assets/138846351/fff78b4a-8eca-40da-9c01-432d95f5285b)
+![pdf-viewer-login](https://github.com/HasithaPeiris/pdf-viewer/assets/138846351/0aa1dd17-61ba-4c62-b2b5-6c7492841e04)
 
 ![pdf-viewer-2](https://github.com/HasithaPeiris/pdf-viewer/assets/138846351/1689aa73-91f1-45f6-9d95-06f45b598b53)
 
 ![pdf-viewer-3](https://github.com/HasithaPeiris/pdf-viewer/assets/138846351/76335f58-0db5-443a-a93d-ec542309defd)
+
+[Click here to experience the live website](https://pdf-viewer-frontend.onrender.com)
 
 This application allows users to upload PDF files to local storage and view them.
 
@@ -52,7 +54,19 @@ npm run build
    ```
    The application will be served at `http://localhost:5173`.
 
-2. Start the backend development server:
+   You need to change the proxy URL of the `vite.config.js` file.
+   ```bash
+   server: {
+      proxy: {
+         "/api": {
+            target: "https://localhost:5000",
+            changeOrigin: true,
+         },
+      },
+   },
+   ```
+
+3. Start the backend development server:
    ```bash
    npm run server
    ```
