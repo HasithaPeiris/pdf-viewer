@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 dotenv.config();
+import cors from "cors";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -11,6 +12,8 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 const app = express();
+
+app.use(cors());
 
 // Middleware for parsing incoming requests with json payloads
 app.use(express.json());
