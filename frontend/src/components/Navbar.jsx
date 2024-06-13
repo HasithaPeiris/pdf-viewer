@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "../slices/userApiSlice";
 import { logout } from "../slices/authSlice";
 
@@ -55,25 +55,30 @@ const Navbar = () => {
                 <a>About</a>
               </li>
               <li>
-                <a>Dashboard</a>
+                <a>Contact</a>
               </li>
             </ul>
           </div>
         )}
 
-        <a className="btn btn-ghost text-xl">PDF Viewer</a>
+        <Link to="/" className="btn btn-ghost text-xl">
+          <div className="flex items-center justify-center">
+            <img className="w-8 mr-2" src="/images/pdf.png" alt="PDF Reader" />
+            <span className="font-bold">PDF Viewer</span>
+          </div>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         {userInfo && (
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <a>About</a>
             </li>
             <li>
-              <a>Dashboard</a>
+              <a>Contact</a>
             </li>
           </ul>
         )}
@@ -87,7 +92,9 @@ const Navbar = () => {
             </a>
           </>
         ) : (
-          <a className="btn">Register</a>
+          <Link to="/register" className="btn">
+            Register
+          </Link>
         )}
       </div>
     </div>
