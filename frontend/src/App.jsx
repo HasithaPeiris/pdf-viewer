@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Viewer from "./pages/Viewer";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/viewer" element={<Viewer />} />
+            <Route path="/viewer/:id" element={<Viewer />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
           <Footer />
         </Router>
