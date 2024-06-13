@@ -8,6 +8,11 @@
 
 [Click here to experience the live website](https://pdf-viewer-frontend.onrender.com)
 
+Use these sample credentials to test the application (or you can register as a new user).
+
+- **Email:** alex@example.com
+- **Password:** 123456
+
 This application allows users to upload PDF files to local storage and view them.
 
 ## Features
